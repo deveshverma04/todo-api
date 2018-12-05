@@ -1,17 +1,18 @@
-const {MongoClient, ObjectID} = require('mongodb');
+const { MongoClient, ObjectID } = require("mongodb");
 
 var obj = new ObjectID();
 console.log(obj);
 
-
-MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
+MongoClient.connect(
+  "mongodb://localhost:27017/TodoApp",
+  (err, client) => {
     if (err) {
-        return console.log(`Unable to connect to Mongo DB server: ${err}`);
+      return console.log(`Unable to connect to Mongo DB server: ${err}`);
     } else {
-        console.log('Connected to MongoDB server');
+      console.log("Connected to MongoDB server");
     }
 
-    const db = client.db('TodoApp');
+    const db = client.db("TodoApp");
 
     // db.collection('Todos').insertOne({
     //     text: 'Something to do',
@@ -24,17 +25,21 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     //     }
     // });
 
-    db.collection('Users').insertOne({
-        name: 'Devesh Verma',
+    db.collection("Users").insertOne(
+      {
+        name: "Devesh Verma",
         age: 34,
-        location: 'Noida'
-    }, (err, result) => {
+        location: "Noida"
+      },
+      (err, result) => {
         if (err) {
-            return console.log('Unable to insert record', err);
+          return console.log("Unable to insert record", err);
         } else {
-            console.log(JSON.stringify(result.ops, undefined, 2));            
+          console.log(JSON.stringify(result.ops, undefined, 2));
         }
-    });
-    
+      }
+    );
+
     client.close();
-});
+  }
+);
